@@ -179,3 +179,42 @@ function enableSpeakButton() {
     const hasContent = document.getElementById('word-result').innerHTML.trim().length > 0;
     speakBtn.disabled = !hasContent;
 }
+
+      // Copy numeric result to clipboard
+      function copyResult() {
+        const text = document.getElementById('result').value;
+        if (!text) return;
+
+        navigator.clipboard.writeText(text)
+        .then(() => alert('Result copied!'))
+        .catch(() => alert('Failed to copy'));
+      }
+
+function percentToResult() {
+  // Only proceed if left exists
+  if (!left) return;
+
+  // If no operator, just divide left by 100
+  if (!operator) {
+    left = (parseFloat(left) / 100).toString();
+    updateResult();
+    convertToWords(left);
+    return;
+  }
+
+  // If operator exists but right is empty, wait for user input
+  if (!right) return;
+
+  // If both operator and right exist, calculate percentage of left
+
+  let result = (parseFloat(right) / 100) * parseFloat(left);
+
+  // Move result to left, clear operator and right
+  left = result.toString();
+  operator = '';
+  right = '';
+
+  updateResult();
+  convertToWords(left);
+}
+
