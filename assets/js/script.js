@@ -2127,6 +2127,7 @@ function solveSimultaneous() {
     if (calculationHistory.length > 20) calculationHistory.shift();
     localStorage.setItem("calcHistory", JSON.stringify(calculationHistory));
     renderHistory();
+    document.getElementById("scroll-to-calculator").click();
 
   } catch (err) {
     alert("Error: " + err.message);
